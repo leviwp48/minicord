@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ${PWD}/app:/app
+      # - ./app:/app
+    ports:
+      - "80:80"
+    environment:
+      - NUM_PROCS=2
+      - API_PROCS=144
+      - CRON_PROCS=0
+      - APP_ENV=levi-test
+      - SUPERVISOR_APP_STOPWAITSECS=20
+      - SECRET_KEY=big-secret
+      - FLASK_DEBUG=1

@@ -1,0 +1,16 @@
+Flask
+uWSGI
+requests
+Jinja2
+Werkzeug
+pymongo==3.13.0
+jsonschema==2.5.1
+rq==0.12.0
+redis==2.10.5
+dramatiq[rabbitmq]==1.13.0
+supervisor
+itsdangerous
+PyJWT
+sqlalchemy
+passlib
+twilio
