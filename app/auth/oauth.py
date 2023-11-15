@@ -2,8 +2,7 @@
 
 from flask import request, redirect, session
 import requests
-import meeting
-
+from meeting import meeting 
 secret_token = '3b0cUKa1RlWtYHXdWiBhWA'
 CLIENT_ID = 'AMrRhGqPR4i6nVsgN_M0Q'
 CLIENT_SECRET = '30tgBycYVLltvUkQ574cYnLZf4mPHt7e'

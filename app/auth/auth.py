@@ -3,7 +3,7 @@ import os
 import jwt
 import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-import orm
+from orm import orm
 
 def register(data):
     username = data.get('username')

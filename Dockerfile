@@ -1,8 +1,5 @@
 FROM python:3.7-slim
 
-# Set the working directory
-# WORKDIR /backend/app
-
 # set environment vars
 ENV PYTHONPATH="app:${PYTHONPATH}"
 ENV SUPERVISOR_APP_STOPWAITSECS=20

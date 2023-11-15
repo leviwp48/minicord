@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twilio Video Demo</title>
     <!-- Twilio Video CDN -->
     <script src="https://sdk.twilio.com/js/video/releases/2.15.2/twilio-video.min.js"></script>
-  </head>
-  <body>
-    <form id="room-name-form">
-      Enter a Room Name to join: <input name="room_name" id="room-name-input" />
-      <button type="submit">Join Room</button>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-200">
+    <form id="room-name-form" class="mb-4">
+        Enter a Room Name to join: <input name="room_name" id="room-name-input" class="border p-2">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Join Room</button>
     </form>
-    <div id="video-container"></div>
+    <div id="video-container" class="flex items-center justify-center w-3/4 md:w-1/2 lg:w-2/3 xl:w-1/2 h-3/4 bg-black">
+        <!-- Video content goes here -->
+    </div>
     <script src="static/main.js"></script>
-  </body>
+</body>
 </html>
