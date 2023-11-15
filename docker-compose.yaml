@@ -17,6 +17,6 @@ services:
       - SUPERVISOR_APP_STOPWAITSECS=20
       - SECRET_KEY=big-secret
       - FLASK_DEBUG=1
-      - ACCOUNT_SID=AC06a51df77203c3010726688868097d65
-      - API_KEY=SK07e9015c5a0d44929b55a575bd91fe73
-      - API_SECRET=jeUEBvO8VCnaQPI8lJP9kWvECCQB99iK
+      - ACCOUNT_SID=<account_id> 
+      - API_KEY=<api_key> 
+      - API_SECRET=<api_secret>
