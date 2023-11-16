@@ -51,14 +51,14 @@ def check_user_exists(session, username, email):
     return user
 
 
-def get_user(session, username, email):
-    user = session.query(User).filter_by(username=username, email=email).first()
+def get_user(session, username):
+    user = session.query(User).filter_by(username=username).first()
     session.commit()
     return user
 
 
 # this is behind a token check
-def update_user(session, user_id, column_name, new_value):
-    user = session.query(User).filter_by(id=user_id).first()
-    setattr(user, column_name, new_value)
-    session.commit()
+# def update_user(session, user_id, column_name, new_value):
+#     user = session.query(User).filter_by(id=user_id).first()
+#     setattr(user, column_name, new_value)
+#     session.commit()

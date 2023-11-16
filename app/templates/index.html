@@ -8,14 +8,68 @@
     <script src="https://sdk.twilio.com/js/video/releases/2.15.2/twilio-video.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen bg-gray-200">
-    <form id="room-name-form" class="mb-4">
-        Enter a Room Name to join: <input name="room_name" id="room-name-input" class="border p-2">
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Join Room</button>
-    </form>
-    <div id="video-container" class="flex items-center justify-center w-3/4 md:w-1/2 lg:w-2/3 xl:w-1/2 h-3/4 bg-black">
-        <!-- Video content goes here -->
+<body class="flex flex-col bg-gray-200">
+
+    <nav class="flex justify-between items-center bg-gray-800 text-white p-4 w-full">
+        <div class="flex-1">
+            <span>Video Test</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="login-button" onclick="openLoginForm()" class="bg-blue-500 px-4 py-2 rounded w-min">Login</button>
+        <button id="register-button" onclick="openRegisterForm()" class="bg-green-500 px-4 py-2 rounded w-min">Register</button>
+            <div id="login-form-modal" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+                <<div class="bg-white p-4 rounded">
+                    <label for="username" class="block mb-2 text-black">Username:</label>
+                    <input type="text" id="login-username" placeholder="Enter your username" class="border p-2 mb-4 text-black bg-gray-100 block w-full">
+                    
+                    <label for="password" class="block mb-2 text-black">Password:</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" class="border p-2 mb-4 text-black bg-gray-100 block w-full">
+                    
+                    <div class="flex space-x-4">
+                        <button onclick="login()" class="bg-blue-500 text-white px-4 py-2 rounded w-1/2">Login</button>
+                        <button onclick="closeLoginForm()" class="bg-gray-500 text-white px-4 py-2 rounded w-1/2">Close</button>
+                    </div>
+                </div>
+            </div>
+            <div id="register-form-modal" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+                <<div class="bg-white p-4 rounded">
+                    <label for="email" class="block mb-2 text-black">Email:</label>
+                    <input type="text" id="register-email" placeholder="Enter your email" class="border p-2 mb-4 text-black bg-gray-100 block w-full">
+                    
+                    <label for="username" class="block mb-2 text-black">Username:</label>
+                    <input type="text" id="register-username" placeholder="Enter your username" class="border p-2 mb-4 text-black bg-gray-100 block w-full">
+                    
+                    <label for="password" class="block mb-2 text-black">Password:</label>
+                    <input type="password" id="register-password" placeholder="Enter your password" class="border p-2 mb-4 text-black bg-gray-100 block w-full">
+                    
+                    <div class="flex space-x-4">
+                        <button onclick="register()" class="bg-blue-500 text-white px-4 py-2 rounded w-1/2">Register</button>
+                        <button onclick="closeRegisterForm()" class="bg-gray-500 text-white px-4 py-2 rounded w-1/2">Close</button>
+                    </div>
+                </div>
+            </div>
+            <div id="user-info" class="hidden flex items-center space-x-2">
+                <span id="logged-in-user"></span>
+                <button id="logout-button" onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex flex-col items-center justify-center h-screen-1/2 mt-8 mb-4">
+        <form id="room-name-form" class="mb-4">
+            Enter a Room Name to join: <input name="room_name" id="room-name-input" class="border p-2">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Join Room</button>
+        </form>
+        
+        <div id="video-container" class="flex items-center justify-center w-3/4 md:w-1/2 lg:w-2/3 xl:w-1/2 h-3/4 bg-black">
+            <!-- Video content goes here -->
+        </div>
+        <div id="leave" class="hidden flex items-center space-x-2">
+            <button id="leave-button" onclick="leaveRoom()" class="bg-red-500 text-white px-4 py-2 rounded">Leave</button>
+        </div>
+        
     </div>
+
     <script src="static/main.js"></script>
 </body>
 </html>

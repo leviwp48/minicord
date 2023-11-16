@@ -25,26 +25,26 @@ def register(data):
 
 def login(data):
     username = data.get('username')
-    email = data.get('email')
     password = data.get('password')
     curr_session = orm.open_session()
     # Check if the user exists and the password is correct
-    user = orm.get_user(curr_session, username, email)
+    user = orm.get_user(curr_session, username)
     passwords_match = check_password_hash(user.password, password)
     orm.close_session(curr_session)
     if passwords_match:
         token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, os.environ.get('SECRET_KEY'))
-        return {'token': token}
+        return {'status_code': 200, 'messasge': 'successfully logged in', 'token': token}
     else:
         return {'status_code': 401, 'message': 'Invalid username or password'}
+    
 
-def update_user(data):
-    username = data.get('username')
-    email = data.get('email')
-    column_name = data.get('column_name')
-    value = data.get('value')
-    curr_session = orm.open_session()
-    user = orm.get_user(curr_session, username, email)
-    if user:
-        orm.update_user(curr_session, user.id, column_name, value)
-    orm.close_session(curr_session)
+# def update_user(data):
+#     username = data.get('username')
+#     email = data.get('email')
+#     column_name = data.get('column_name')
+#     value = data.get('value')
+#     curr_session = orm.open_session()
+#     user = orm.get_user(curr_session, username, email)
+#     if user:
+#         orm.update_user(curr_session, user.id, column_name, value)
+#     orm.close_session(curr_session)

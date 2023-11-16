@@ -14,8 +14,10 @@ twilio_client = twilio.rest.Client(api_key, api_secret, account_sid)
 def find_or_create_room(room_name):
     try:
         # try to fetch an in-progress room with this name
+        print('finding room')
         twilio_client.video.rooms(room_name).fetch()
     except twilio.base.exceptions.TwilioRestException:
+        print('creating room')
         # the room did not exist, so create it
         twilio_client.video.rooms.create(unique_name=room_name, type="go")
 
