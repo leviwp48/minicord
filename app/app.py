@@ -35,12 +35,32 @@ def login():
     return jsonify(res)
 
 
+# Persist User Login
+@decorators.token_required
+@app.route('/keep-login', methods=['POST'])
+def keep_login():
+    print('here in keep login')
+    data = request.get_json()
+    res = user.keep_login(data)
+    print('returning this: ', res)
+    return jsonify(res)
+
+
 # # User update
 # @decorators.token_required
 # @app.route('/update-user', methods=['POST'])
 # def update_user():
 #     data = request.get_json()
 #     res = user.update_user(data)
+#     return jsonify(res)
+
+
+# # User update
+# @decorators.token_required
+# @app.route('/delete-user', methods=['POST'])
+# def update_user():
+#     data = request.get_json()
+#     res = user.delete_user(data)
 #     return jsonify(res)
 
 

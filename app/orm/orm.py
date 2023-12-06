@@ -58,7 +58,7 @@ def get_user(session, username):
 
 
 # this is behind a token check
-# def update_user(session, user_id, column_name, new_value):
-#     user = session.query(User).filter_by(id=user_id).first()
-#     setattr(user, column_name, new_value)
-#     session.commit()
+def update_user(session, user_id, column_name, new_value):
+    user = session.query(User).filter_by(id=user_id).first()
+    setattr(user, column_name, new_value)
+    session.commit()

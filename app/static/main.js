@@ -124,7 +124,6 @@ const leaveRoom = (participant) => {
 
 }
 
-
 // login and registering 
 const login = async (username="", password="") => {
   // Simulate authentication (you would perform actual authentication here)
@@ -146,10 +145,11 @@ const login = async (username="", password="") => {
         },
         body: JSON.stringify({ username: username, password: password }),
       });
-      console.log(response)
       // Check if the request was successful (status code 200)
       if (response.ok) {
+        const responseData = await response.json();
         isLoggedIn = true;
+        sessionStorage.setItem('user', responseData['token']);
         updateUI(username);
       } else {
         // Handle authentication failure (e.g., display an error message)
@@ -189,7 +189,6 @@ const register = async (email="", username="", password="") => {
   if (password === "") { 
     password = document.getElementById('register-password').value;
   }
-  console.log(email)
   if (username.trim() !== "" && password.trim() !== "") {
     try {
       // Send a POST request to the /login endpoint with the username
@@ -200,14 +199,11 @@ const register = async (email="", username="", password="") => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email: email, username: username, password: password }),
-      })
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => console.error('Error:', error));
-    
+      });
+
       // Check if the request was successful (status code 200)
       if (response.ok) {
+        console.log('here2')
         login(username, password)
       } else {
         // Handle authentication failure (e.g., display an error message)
@@ -237,6 +233,7 @@ const updateUI = (username="") => {
     loginButton.style.display = "none";
     loginForm.style.display = "none";
     registerButton.style.display = "none";
+    registerForm.style.display = "none";
     userInfo.style.display = "block";
     loggedInUser.textContent = username;
   } else {
@@ -279,6 +276,35 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
         register();
     }
+
+  });
+
+  const keep_login = async () => {
+    // Check if there's a token in session storage
+    const storedToken = sessionStorage.getItem('user');
+    if (storedToken) {
+      const response = await fetch("/keep-login", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ storedToken: storedToken }),
+      });
+
+      if (response.ok){
+        const responseData = await response.json();
+        isLoggedIn = true;
+        updateUI(responseData['username']);
+      }
+    } else {
+      // Token does not exist, user is not logged in
+      console.log('User did not have a saved token');
+    }
+  };
+
+  window.addEventListener('load', () => {
+    keep_login();
   });
 
   form.addEventListener("submit", startRoom);

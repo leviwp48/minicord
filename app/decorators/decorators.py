@@ -11,7 +11,7 @@ def token_required(f):
         if not token:
             return jsonify({'message': 'Token is missing!'}), 403
         try:
-            data = jwt.decode(token, os.environ['SECRET_KEY'])
+            jwt.decode(token, os.environ['SECRET_KEY'])
         except:
             return jsonify({'message': 'Token is invalid!'}), 403
         return f(*args, **kwargs)
@@ -26,7 +26,5 @@ def check_access_token(f):
         if access_token:
             return f(*args, **kwargs)
         else:
-            # Redirect to the login page or handle the case when the access token is not available
             return 'no access token'
-            # return redirect(url_for('login'))  # Replace 'login' with your login route
     return decorated_function
